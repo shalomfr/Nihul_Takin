@@ -57,6 +57,7 @@ export default function ServicesContent() {
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
   const [activePanel, setActivePanel] = useState<PanelType>(null);
   const [headerSolid, setHeaderSolid] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
@@ -112,66 +113,69 @@ export default function ServicesContent() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#f7f8fa] to-white" />
 
         <div className="relative z-10 text-center px-4 pt-24 pb-16 max-w-3xl mx-auto">
-          {/* Logo */}
+          {/* Logo — everything waits for this to load */}
           <motion.img
             src={`/logo-transparent.webp?v=${v}`}
             alt="מעטפת ניהולית"
             className="h-20 sm:h-28 md:h-32 w-auto mx-auto mb-10 float-slow"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={logoLoaded ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            onLoad={() => setLogoLoaded(true)}
           />
 
-          {/* Title */}
-          <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#1a1a2e] mb-4"
-            style={{ fontFamily: "'Secular One', sans-serif" }}
-          >
-            <WordReveal text="ניהול תקין" delay={0.2} />
-          </h1>
-          <motion.p
-            className="text-xl sm:text-2xl text-[#5a5a6e] font-light mb-10"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-          >
-            מעטפת ניהולית בע״מ
-          </motion.p>
-
-          {/* Thin divider */}
-          <motion.div
-            className="w-16 h-[1px] bg-[#d0d0d0] mx-auto mb-10"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          />
-
-          {/* Description */}
-          <div className="space-y-4 max-w-2xl mx-auto mb-12">
-            {[
-              "ניהול תקין - מעטפת ניהולית פועלת כגוף ליווי וניהול על לעמותות וארגונים.",
-              "החברה אינה מספקת שירותי משרד, מזכירות או תפעול שוטף, ואינה מחליפה את הנהלת הארגון.",
-              "פעילות החברה מתמקדת בהחזקת התשתית הניהולית, הרגולטורית והמערכתית של הארגון.",
-            ].map((text, i) => (
-              <motion.p
-                key={i}
-                className="text-[#6b6b7b] text-sm sm:text-base leading-[1.9]"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0 + i * 0.12, duration: 0.5 }}
+          {logoLoaded && (
+            <>
+              {/* Title */}
+              <h1
+                className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#1a1a2e] mb-4"
+                style={{ fontFamily: "'Secular One', sans-serif" }}
               >
-                {text}
+                <WordReveal text="ניהול תקין" delay={0.2} />
+              </h1>
+              <motion.p
+                className="text-xl sm:text-2xl text-[#5a5a6e] font-light mb-10"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                מעטפת ניהולית בע״מ
               </motion.p>
-            ))}
-          </div>
 
-          {/* Side buttons */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-3"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.5 }}
-          >
+              {/* Thin divider */}
+              <motion.div
+                className="w-16 h-[1px] bg-[#d0d0d0] mx-auto mb-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+              />
+
+              {/* Description */}
+              <div className="space-y-4 max-w-2xl mx-auto mb-12">
+                {[
+                  "ניהול תקין - מעטפת ניהולית פועלת כגוף ליווי וניהול על לעמותות וארגונים.",
+                  "החברה אינה מספקת שירותי משרד, מזכירות או תפעול שוטף, ואינה מחליפה את הנהלת הארגון.",
+                  "פעילות החברה מתמקדת בהחזקת התשתית הניהולית, הרגולטורית והמערכתית של הארגון.",
+                ].map((text, i) => (
+                  <motion.p
+                    key={i}
+                    className="text-[#6b6b7b] text-sm sm:text-base leading-[1.9]"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.0 + i * 0.12, duration: 0.5 }}
+                  >
+                    {text}
+                  </motion.p>
+                ))}
+              </div>
+
+              {/* Side buttons */}
+              <motion.div
+                className="flex flex-wrap justify-center gap-3"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.4, duration: 0.5 }}
+              >
             {sideButtons.map((btn) => (
               <MagneticButton
                 key={btn.id}
@@ -183,7 +187,8 @@ export default function ServicesContent() {
               </MagneticButton>
             ))}
           </motion.div>
-
+            </>
+          )}
         </div>
       </section>
 
