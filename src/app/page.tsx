@@ -10,8 +10,12 @@ export default function Home() {
   return (
     <>
       <DocumentsAnimation onComplete={() => setAnimDone(true)} />
-      <ServicesContent />
-      <Footer />
+      {animDone && (
+        <>
+          <ServicesContent />
+          <Footer />
+        </>
+      )}
     </>
   );
 }
