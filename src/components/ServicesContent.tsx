@@ -88,9 +88,8 @@ export default function ServicesContent() {
           </span>
           <nav className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm">
             {[
-              { href: "https://www.gov.il/he/departments/topics/amutot", label: "חוקים והנחיות" },
+              { href: "https://www.gov.il/he/departments/topics/associations_and_companies_for_the_benefit_of_the_public/govil-landing-page", label: "רשם העמותות" },
               { href: "https://www.guidestar.org.il/", label: "גיידסטאר" },
-              { href: "https://www.gov.il/he/departments/Units/rasham_amutot", label: "רשם העמותות" },
             ].map((link) => (
               <a
                 key={link.label}
