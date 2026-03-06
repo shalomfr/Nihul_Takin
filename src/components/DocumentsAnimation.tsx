@@ -64,7 +64,7 @@ export default function DocumentsAnimation({ onComplete }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] transition-opacity duration-[2000ms] ease-in-out"
+      className="fixed inset-0 z-[9999] bg-white transition-opacity duration-[2000ms] ease-in-out"
       style={{ opacity: fading ? 0 : 1 }}
     >
       {/* Video background */}
