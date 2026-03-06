@@ -177,28 +177,13 @@ export default function ServicesContent() {
                 key={btn.id}
                 onClick={() => setActivePanel(btn.id)}
               >
-                <div className="px-5 py-2.5 rounded-full border border-[#e0e0e0] bg-white hover:bg-[#f7f8fa] hover:border-[#c0c0c0] transition-all text-sm text-[#5a5a6e] hover:text-[#1a1a2e] shadow-sm">
+                <div className="px-7 py-3 rounded-full border-2 border-[#1e3a5f] bg-white hover:bg-[#1e3a5f] transition-all duration-300 text-sm font-bold text-[#1e3a5f] hover:text-white shadow-md hover:shadow-lg">
                   {btn.label}
                 </div>
               </MagneticButton>
             ))}
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8 }}
-          >
-            <motion.div
-              className="w-5 h-9 rounded-full border border-[#d0d0d0] flex items-start justify-center p-1.5"
-              animate={{ y: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-            >
-              <div className="w-1 h-2.5 bg-[#c0c0c0] rounded-full" />
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
