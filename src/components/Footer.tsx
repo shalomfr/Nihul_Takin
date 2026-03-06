@@ -8,7 +8,7 @@ export default function Footer() {
           {/* Logo */}
           <a href="#">
             <img
-              src={`/logo-transparent.png?v=${v}`}
+              src={`/logo-transparent.webp?v=${v}`}
               alt="מעטפת"
               className="h-12 sm:h-14 w-auto"
             />

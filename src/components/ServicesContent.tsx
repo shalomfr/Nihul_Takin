@@ -114,7 +114,7 @@ export default function ServicesContent() {
         <div className="relative z-10 text-center px-4 pt-24 pb-16 max-w-3xl mx-auto">
           {/* Logo */}
           <motion.img
-            src={`/logo-transparent.png?v=${v}`}
+            src={`/logo-transparent.webp?v=${v}`}
             alt="מעטפת ניהולית"
             className="h-20 sm:h-28 md:h-32 w-auto mx-auto mb-10 float-slow"
             initial={{ opacity: 0, scale: 0.9 }}
