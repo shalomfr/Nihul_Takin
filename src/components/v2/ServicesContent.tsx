@@ -39,13 +39,15 @@ export default function ServicesContent() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleLoad = () => setLoading(false);
-    if (document.readyState === "complete") {
-      setLoading(false);
-    } else {
-      window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
-    }
+    const minDelay = new Promise(resolve => setTimeout(resolve, 1200));
+    const pageLoad = new Promise<void>(resolve => {
+      if (document.readyState === "complete") {
+        resolve();
+      } else {
+        window.addEventListener("load", () => resolve(), { once: true });
+      }
+    });
+    Promise.all([minDelay, pageLoad]).then(() => setLoading(false));
   }, []);
 
   // Lock scroll during loading, reset to top when done
