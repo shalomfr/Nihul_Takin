@@ -415,9 +415,19 @@ export default function ServicesContent() {
 
       {/* ══════════════════ TOPICS / FEATURES ══════════════════ */}
       <section
-        className="py-24 px-[5%]"
+        className="py-24 px-[5%] relative overflow-hidden"
         style={{ background: "linear-gradient(180deg, #f5f7ff, white)" }}
       >
+        {/* Subtle background video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          src="/flying-docs-bg.webm"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ opacity: 0.06, mixBlendMode: "multiply" }}
+        />
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 25 }}
