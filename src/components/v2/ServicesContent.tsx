@@ -220,9 +220,9 @@ export default function ServicesContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
             >
-              <span className="block text-[#0f1b3d]">מעטפת</span>
+              <span className="block text-[#0f1b3d]">ניהול תקין</span>
               <span className="block bg-gradient-to-l from-[#1a3a8f] to-[#4a7aff] bg-clip-text text-transparent">
-                ניהול תקין
+                מעטפת ניהולית
               </span>
             </motion.h1>
 
@@ -233,7 +233,7 @@ export default function ServicesContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.4 }}
             >
-              מעטפת ניהולית פועלת כגוף ליווי וניהול על{" "}
+              ניהול תקין פועלת כגוף ליווי וניהול על{" "}
               <strong className="text-[#0f1b3d] font-semibold">לעמותות וארגונים</strong>.
               פעילות החברה מתמקדת בהחזקת{" "}
               <strong className="text-[#0f1b3d] font-semibold">התשתית הניהולית</strong>,
