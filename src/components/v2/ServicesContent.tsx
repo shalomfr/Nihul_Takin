@@ -39,7 +39,7 @@ export default function ServicesContent() {
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const minDelay = new Promise(resolve => setTimeout(resolve, 1200));
+    const minDelay = new Promise(resolve => setTimeout(resolve, 2500));
     const pageLoad = new Promise<void>(resolve => {
       if (document.readyState === "complete") {
         resolve();
