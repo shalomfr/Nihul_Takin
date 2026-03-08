@@ -628,6 +628,15 @@ export default function ServicesContent() {
         )}
       </AnimatePresence>
 
+      {/* ══════════════════ FAQ FAB ══════════════════ */}
+      <button
+        onClick={() => setActivePanel("faq")}
+        className="fixed bottom-6 right-6 z-[90] w-14 h-14 rounded-2xl bg-gradient-to-l from-[#0f1b3d] to-[#1a3a8f] text-white shadow-[0_8px_30px_rgba(26,58,143,0.35)] flex items-center justify-center cursor-pointer border border-white/10 hover:-translate-y-1 hover:shadow-[0_12px_35px_rgba(26,58,143,0.45)] transition-all duration-300 backdrop-blur-sm"
+        aria-label="שאלות ותשובות"
+      >
+        <span className="text-[22px] font-bold leading-none">?</span>
+      </button>
+
       {/* ══════════════════ MODALS ══════════════════ */}
       <TopicModal
         topic={selectedTopic}
