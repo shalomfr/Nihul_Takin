@@ -207,7 +207,9 @@ export default function TelAvivLanding() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
             >
-              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[280px] xl:h-[320px] w-auto drop-shadow-[0_4px_24px_rgba(255,255,255,0.15)]" />
+              <div className="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-[0_8px_40px_rgba(0,0,0,0.2)]">
+                <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[220px] xl:h-[260px] w-auto" />
+              </div>
             </motion.div>
 
             {/* Left: Questionnaire in hero */}
