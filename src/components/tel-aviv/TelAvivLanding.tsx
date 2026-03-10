@@ -340,61 +340,61 @@ export default function TelAvivLanding() {
       {/* ═══ NEWS + CTA ROW ═══ */}
       <section className="py-12 px-[3%] bg-white border-t border-b border-[#eee]">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col lg:flex-row gap-10">
-            {/* News */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-end justify-between mb-8">
-                <div>
-                  <span className="text-[11px] font-semibold tracking-[2px] text-[#0077C8] uppercase block mb-2">עדכונים אחרונים</span>
-                  <h2 className="text-[26px] font-semibold text-[#1a1a2e] m-0">חדשות ועדכונים</h2>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {newsItems.map((item, i) => (
-                  <motion.div key={item.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                    <div className="bg-[#fafbfc] rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-white transition-all cursor-pointer group">
-                      <div className="flex-1 min-w-0">
-                        <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2.5 py-0.5 rounded-full mb-2.5">{item.tag}</span>
-                        <h3 className="text-[14px] font-medium text-[#333] mb-2 leading-snug group-hover:text-[#0077C8] transition-colors">{item.title}</h3>
-                        <span className="text-[12px] text-[#bbb] font-light">{item.date}</span>
-                      </div>
-                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 mt-1 border border-[#eee]">
-                        <FileText size={18} className="text-[#ccc] group-hover:text-[#0077C8] transition-colors" />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="text-[11px] font-semibold tracking-[2px] text-[#0077C8] uppercase block mb-2">עדכונים אחרונים</span>
+              <h2 className="text-[26px] font-semibold text-[#1a1a2e] m-0">חדשות ועדכונים</h2>
             </div>
+          </div>
 
-            {/* CTA sidebar */}
-            <div className="w-full lg:w-[340px] shrink-0">
-              <div>
-                {/* Mobile only: questionnaire */}
-                <div className="lg:hidden mb-5">
-                  <QuestionnaireScroller />
-                </div>
+          {/* Mobile only: questionnaire */}
+          <div className="lg:hidden mb-8">
+            <QuestionnaireScroller />
+          </div>
 
-                <div className="rounded-2xl overflow-hidden">
-                  <div className="bg-gradient-to-br from-[#002d4f] to-[#0077C8] p-8 text-white relative">
-                    <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
-                    <div className="relative z-10">
-                      <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
-                        <MessageCircle size={26} className="opacity-80" />
-                      </div>
-                      <h3 className="text-[20px] font-semibold mb-2">צריכים ליווי מקצועי?</h3>
-                      <p className="text-[13px] text-white/60 mb-6 leading-relaxed font-light">הצוות שלנו ילווה אתכם בכל שלב — מהקמת העמותה ועד ניהולה השוטף</p>
-                      <a href="mailto:info@matefet.co.il" className="flex items-center justify-center gap-2 bg-white text-[#0077C8] px-5 py-3 rounded-xl text-[14px] font-semibold no-underline hover:bg-[#f0f7ff] transition-colors w-full shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
-                        <Mail size={15} />
-                        שלחו לנו מייל
-                      </a>
-                      <a href="tel:+972000000000" className="flex items-center justify-center gap-2 bg-white/10 text-white/90 px-5 py-3 rounded-xl text-[14px] font-normal no-underline hover:bg-white/20 transition-colors w-full mt-3 border border-white/10">
-                        <Phone size={15} />
-                        <span dir="ltr">050-000-0000</span>
-                      </a>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {newsItems.map((item, i) => (
+              <motion.div key={item.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                <div className="bg-[#fafbfc] rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-white transition-all cursor-pointer group">
+                  <div className="flex-1 min-w-0">
+                    <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2.5 py-0.5 rounded-full mb-2.5">{item.tag}</span>
+                    <h3 className="text-[14px] font-medium text-[#333] mb-2 leading-snug group-hover:text-[#0077C8] transition-colors">{item.title}</h3>
+                    <span className="text-[12px] text-[#bbb] font-light">{item.date}</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 mt-1 border border-[#eee]">
+                    <FileText size={18} className="text-[#ccc] group-hover:text-[#0077C8] transition-colors" />
                   </div>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CTA SECTION ═══ */}
+      <section className="py-12 px-[3%]">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="rounded-2xl overflow-hidden relative" style={{ background: "linear-gradient(135deg, #002d4f 0%, #0077C8 100%)" }}>
+            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-10 sm:px-16 py-12 gap-8">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                  <MessageCircle size={26} className="opacity-80" />
+                </div>
+                <div>
+                  <h3 className="text-[20px] font-semibold text-white mb-1">צריכים ליווי מקצועי?</h3>
+                  <p className="text-[13px] text-white/60 font-light m-0">הצוות שלנו ילווה אתכם בכל שלב — מהקמת העמותה ועד ניהולה השוטף</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 shrink-0">
+                <a href="mailto:info@matefet.co.il" className="inline-flex items-center justify-center gap-2 bg-white text-[#0077C8] px-6 py-3 rounded-xl text-[14px] font-semibold no-underline hover:bg-[#f0f7ff] transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.1)] whitespace-nowrap">
+                  <Mail size={15} />
+                  שלחו לנו מייל
+                </a>
+                <a href="tel:+972000000000" className="inline-flex items-center justify-center gap-2 bg-white/10 text-white/90 px-6 py-3 rounded-xl text-[14px] font-normal no-underline hover:bg-white/20 transition-colors border border-white/10 whitespace-nowrap">
+                  <Phone size={15} />
+                  <span dir="ltr">050-000-0000</span>
+                </a>
               </div>
             </div>
           </div>
