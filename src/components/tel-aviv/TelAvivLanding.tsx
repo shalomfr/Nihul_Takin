@@ -122,9 +122,8 @@ export default function TelAvivLanding() {
               })}
             </div>
             {/* Logo */}
-            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2.5 no-underline">
+            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center no-underline">
               <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-11 w-auto" />
-              <span className="hidden sm:block text-[15px] font-semibold text-[#333]">ניהול תקין</span>
             </a>
             {/* Left nav */}
             <div className="hidden lg:flex items-center gap-2">
@@ -427,12 +426,8 @@ export default function TelAvivLanding() {
       <footer className="bg-white border-t border-[#eee] py-8 px-[3%]">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 pb-6 border-b border-[#eee]">
-            <div className="flex items-center gap-3">
-              <img src={`/logo-transparent.webp?v=${v}`} alt="" className="h-9 w-auto" />
-              <div className="flex flex-col leading-tight">
-                <span className="text-[14px] font-semibold text-[#333]">ניהול תקין</span>
-                <span className="text-[11px] text-[#aaa] font-light">מעטפת ניהולית</span>
-              </div>
+            <div className="flex items-center">
+              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-12 w-auto" />
             </div>
             <div className="flex flex-wrap gap-5 justify-center">
               {externalLinks.map(link => (
