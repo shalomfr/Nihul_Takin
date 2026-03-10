@@ -122,8 +122,9 @@ export default function TelAvivLanding() {
               })}
             </div>
             {/* Logo */}
-            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center no-underline">
+            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 no-underline">
               <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-9 w-auto" />
+              <span className="text-[14px] font-semibold text-[#333]">ניהול תקין</span>
             </a>
             {/* Left nav */}
             <div className="hidden lg:flex items-center gap-2">
@@ -167,18 +168,6 @@ export default function TelAvivLanding() {
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,40,80,0.85) 0%, rgba(0,80,140,0.6) 40%, rgba(0,119,200,0.3) 100%)" }} />
           {/* Pattern overlay */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-
-          {/* Center: Big Logo - absolute center */}
-          <motion.div
-            className="hidden lg:flex absolute inset-0 z-[5] items-center justify-center pointer-events-none"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-10 shadow-[0_8px_40px_rgba(0,0,0,0.15)] border border-white/20">
-              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[220px] xl:h-[260px] w-auto brightness-[1.8] contrast-[1.1]" />
-            </div>
-          </motion.div>
 
           <div className="relative z-10 max-w-[1400px] mx-auto px-[3%] h-full flex items-stretch py-10 md:py-14">
             {/* Right: Hero content */}
@@ -438,8 +427,12 @@ export default function TelAvivLanding() {
       <footer className="bg-white border-t border-[#eee] py-8 px-[3%]">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 pb-6 border-b border-[#eee]">
-            <div className="flex items-center">
+            <div className="flex items-center gap-3">
               <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-12 w-auto" />
+              <div className="flex flex-col">
+                <span className="text-[14px] font-semibold text-[#333]">ניהול תקין</span>
+                <span className="text-[11px] text-[#aaa] font-light">מעטפת ניהולית</span>
+              </div>
             </div>
             <div className="flex flex-wrap gap-5 justify-center">
               {externalLinks.map(link => (
