@@ -178,7 +178,7 @@ export default function TelAvivLanding() {
                   <span className="text-[12px] text-white/90 font-light tracking-wide">ליווי ניהולי מוביל לעמותות וארגונים</span>
                 </motion.div>
 
-                <motion.h1 className="text-[38px] sm:text-[48px] md:text-[58px] font-bold text-white leading-[1.1] mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }}>
+                <motion.h1 className="text-[42px] sm:text-[54px] md:text-[64px] font-black text-white leading-[1.05] mb-4" style={{ fontFamily: "'Rubik', 'Assistant', sans-serif" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }}>
                   ניהול תקין
                   <br />
                   <span className="bg-gradient-to-l from-[#60b3f7] to-[#a5d8ff] bg-clip-text text-transparent">מעטפת ניהולית</span>
@@ -252,107 +252,154 @@ export default function TelAvivLanding() {
         </div>
       </section>
 
-      {/* ═══ MAIN CONTENT ═══ */}
-      <div className="max-w-[1400px] mx-auto px-[3%] pb-12">
-        <div className="flex flex-col lg:flex-row gap-10">
+      {/* ═══ TOPICS ═══ */}
+      <section className="py-16 px-[3%]">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <span className="text-[11px] font-semibold tracking-[2px] text-[#0077C8] uppercase block mb-2">מה אנחנו מכסים</span>
+              <h2 className="text-[30px] sm:text-[34px] font-semibold text-[#1a1a2e] m-0 leading-tight">תחומי ידע</h2>
+            </div>
+            <button onClick={() => setActivePanel("articles")} className="text-[13px] text-[#0077C8] font-medium hover:underline cursor-pointer bg-transparent border-none flex items-center gap-1.5 pb-1">
+              לכל הנושאים
+              <ArrowLeft size={14} />
+            </button>
+          </div>
 
-          {/* ── Right: Topics + News ── */}
-          <div className="flex-1 min-w-0">
+          {/* Featured topic - first one large */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+            {(() => {
+              const topic = topics[0];
+              const Icon = topicIcons[topic.id] || Landmark;
+              return (
+                <motion.div className="lg:col-span-2 lg:row-span-2" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                  <button onClick={() => setSelectedTopic(topic)} className="w-full h-full text-right bg-white rounded-2xl overflow-hidden border border-[#e8eaed] hover:border-[#0077C8]/30 hover:shadow-[0_12px_40px_rgba(0,119,200,0.1)] transition-all duration-300 cursor-pointer p-0 group">
+                    <div className="h-[180px] lg:h-[220px] flex items-center justify-center relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${topic.color} 0%, ${topic.color}cc 50%, ${topic.color}88 100%)` }}>
+                      <Icon size={56} className="text-white/40 group-hover:scale-110 transition-transform duration-500" />
+                      <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/8" />
+                      <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/5" />
+                    </div>
+                    <div className="p-7">
+                      <h3 className="text-[20px] font-semibold text-[#1a1a2e] mb-3 group-hover:text-[#0077C8] transition-colors">{topic.title}</h3>
+                      <p className="text-[14px] text-[#666] leading-[1.8] m-0 font-light">{topic.content[0]}</p>
+                      <span className="inline-flex items-center gap-1.5 text-[13px] text-[#0077C8] font-medium mt-5 group-hover:gap-2.5 transition-all">
+                        קראו עוד <ArrowLeft size={14} />
+                      </span>
+                    </div>
+                  </button>
+                </motion.div>
+              );
+            })()}
 
-            {/* Topics */}
-            <section className="mb-14">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <h2 className="text-[26px] font-semibold text-[#222] m-0">תחומי ידע</h2>
-                  <p className="text-[14px] text-[#999] font-light mt-1 m-0">לחצו על נושא לקריאה מעמיקה</p>
-                </div>
-                <button onClick={() => setActivePanel("articles")} className="text-[13px] text-[#0077C8] font-medium hover:underline cursor-pointer bg-transparent border-none flex items-center gap-1">
-                  לכל הנושאים
-                  <ArrowLeft size={14} />
-                </button>
-              </div>
+            {/* Second and third topics - stacked on the right */}
+            {topics.slice(1, 3).map((topic, i) => {
+              const Icon = topicIcons[topic.id] || Landmark;
+              return (
+                <motion.div key={topic.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i + 1) * 0.08 }}>
+                  <button onClick={() => setSelectedTopic(topic)} className="w-full h-full text-right bg-white rounded-2xl overflow-hidden border border-[#e8eaed] hover:border-[#0077C8]/30 hover:shadow-[0_8px_28px_rgba(0,119,200,0.1)] transition-all duration-300 cursor-pointer p-0 group">
+                    <div className="p-5 flex items-start gap-4">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300" style={{ background: `linear-gradient(135deg, ${topic.color}22, ${topic.color}11)`, color: topic.color }}>
+                        <Icon size={26} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-[15px] font-semibold text-[#1a1a2e] mb-1.5 group-hover:text-[#0077C8] transition-colors">{topic.title}</h3>
+                        <p className="text-[12px] text-[#888] leading-relaxed m-0 font-light">{topic.content[0].slice(0, 80)}...</p>
+                        <span className="inline-flex items-center gap-1 text-[11px] text-[#0077C8] font-medium mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          קראו עוד <ArrowLeft size={12} />
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-                {topics.map((topic, i) => {
-                  const Icon = topicIcons[topic.id] || Landmark;
-                  return (
-                    <motion.div key={topic.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
-                      <button onClick={() => setSelectedTopic(topic)} className="w-full text-right bg-white rounded-2xl overflow-hidden border border-[#eee] hover:border-[#0077C8]/30 hover:shadow-[0_8px_28px_rgba(0,119,200,0.1)] transition-all duration-300 cursor-pointer p-0 group">
-                        <div className="h-[90px] flex items-center justify-center relative overflow-hidden" style={{ background: `linear-gradient(145deg, ${topic.color}ee, ${topic.color}99)` }}>
-                          <Icon size={36} className="text-white/70 group-hover:scale-110 transition-transform duration-300" />
-                          {/* Decorative circle */}
-                          <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-white/10" />
-                        </div>
-                        <div className="p-5">
-                          <h3 className="text-[15px] font-semibold text-[#222] mb-2 group-hover:text-[#0077C8] transition-colors">{topic.title}</h3>
-                          <p className="text-[12px] text-[#888] leading-relaxed m-0 font-light">{topic.content[0].slice(0, 70)}...</p>
-                          <span className="inline-flex items-center gap-1 text-[11px] text-[#0077C8] font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            קראו עוד <ArrowLeft size={12} />
-                          </span>
-                        </div>
-                      </button>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </section>
+          {/* Remaining topics - 5 in a row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {topics.slice(3).map((topic, i) => {
+              const Icon = topicIcons[topic.id] || Landmark;
+              return (
+                <motion.div key={topic.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+                  <button onClick={() => setSelectedTopic(topic)} className="w-full text-right bg-white rounded-xl overflow-hidden border border-[#e8eaed] hover:border-[#0077C8]/30 hover:shadow-[0_6px_24px_rgba(0,119,200,0.08)] transition-all duration-300 cursor-pointer p-0 group">
+                    <div className="h-2 w-full" style={{ background: `linear-gradient(90deg, ${topic.color}, ${topic.color}88)` }} />
+                    <div className="p-4 text-center">
+                      <div className="w-11 h-11 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform duration-300" style={{ background: `${topic.color}12`, color: topic.color }}>
+                        <Icon size={22} />
+                      </div>
+                      <h3 className="text-[13px] font-semibold text-[#1a1a2e] group-hover:text-[#0077C8] transition-colors leading-snug">{topic.title}</h3>
+                    </div>
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
+      {/* ═══ NEWS + CTA ROW ═══ */}
+      <section className="py-12 px-[3%] bg-white border-t border-b border-[#eee]">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex flex-col lg:flex-row gap-10">
             {/* News */}
-            <section>
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-[26px] font-semibold text-[#222] m-0">חדשות ועדכונים</h2>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-end justify-between mb-8">
+                <div>
+                  <span className="text-[11px] font-semibold tracking-[2px] text-[#0077C8] uppercase block mb-2">עדכונים אחרונים</span>
+                  <h2 className="text-[26px] font-semibold text-[#1a1a2e] m-0">חדשות ועדכונים</h2>
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {newsItems.map((item, i) => (
                   <motion.div key={item.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                    <div className="bg-white rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] transition-all cursor-pointer group">
+                    <div className="bg-[#fafbfc] rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-white transition-all cursor-pointer group">
                       <div className="flex-1 min-w-0">
-                        <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2 py-0.5 rounded-full mb-2">{item.tag}</span>
+                        <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2.5 py-0.5 rounded-full mb-2.5">{item.tag}</span>
                         <h3 className="text-[14px] font-medium text-[#333] mb-2 leading-snug group-hover:text-[#0077C8] transition-colors">{item.title}</h3>
                         <span className="text-[12px] text-[#bbb] font-light">{item.date}</span>
                       </div>
-                      <div className="w-10 h-10 rounded-lg bg-[#f5f7fa] flex items-center justify-center shrink-0 mt-1">
-                        <FileText size={18} className="text-[#ccc]" />
+                      <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 mt-1 border border-[#eee]">
+                        <FileText size={18} className="text-[#ccc] group-hover:text-[#0077C8] transition-colors" />
                       </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
-            </section>
-          </div>
+            </div>
 
-          {/* ── Left: Sidebar ── */}
-          <div className="w-full lg:w-[330px] xl:w-[360px] shrink-0">
-            <div className="lg:sticky lg:top-[84px]">
-              {/* Mobile only: questionnaire */}
-              <div className="lg:hidden mb-5">
-                <QuestionnaireScroller />
-              </div>
+            {/* CTA sidebar */}
+            <div className="w-full lg:w-[340px] shrink-0">
+              <div className="lg:sticky lg:top-[84px]">
+                {/* Mobile only: questionnaire */}
+                <div className="lg:hidden mb-5">
+                  <QuestionnaireScroller />
+                </div>
 
-              {/* CTA */}
-              <div className="mt-5 rounded-2xl overflow-hidden">
-                <div className="bg-gradient-to-br from-[#004e82] to-[#0077C8] p-7 text-white text-center relative">
-                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
-                  <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2" />
-                  <div className="relative z-10">
-                    <MessageCircle size={24} className="mx-auto mb-3 opacity-70" />
-                    <h3 className="text-[17px] font-semibold mb-1.5">צריכים ליווי מקצועי?</h3>
-                    <p className="text-[12px] text-white/65 mb-5 leading-relaxed font-light">הצוות שלנו ילווה אתכם בכל שלב</p>
-                    <a href="mailto:info@matefet.co.il" className="flex items-center justify-center gap-2 bg-white text-[#0077C8] px-5 py-2.5 rounded-lg text-[13px] font-semibold no-underline hover:bg-[#f0f7ff] transition-colors w-full">
-                      <Mail size={14} />
-                      שלחו מייל
-                    </a>
-                    <a href="tel:+972000000000" className="flex items-center justify-center gap-2 bg-white/10 text-white/90 px-5 py-2.5 rounded-lg text-[13px] font-normal no-underline hover:bg-white/20 transition-colors w-full mt-2">
-                      <Phone size={14} />
-                      <span dir="ltr">050-000-0000</span>
-                    </a>
+                <div className="rounded-2xl overflow-hidden">
+                  <div className="bg-gradient-to-br from-[#002d4f] to-[#0077C8] p-8 text-white relative">
+                    <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-5">
+                        <MessageCircle size={26} className="opacity-80" />
+                      </div>
+                      <h3 className="text-[20px] font-semibold mb-2">צריכים ליווי מקצועי?</h3>
+                      <p className="text-[13px] text-white/60 mb-6 leading-relaxed font-light">הצוות שלנו ילווה אתכם בכל שלב — מהקמת העמותה ועד ניהולה השוטף</p>
+                      <a href="mailto:info@matefet.co.il" className="flex items-center justify-center gap-2 bg-white text-[#0077C8] px-5 py-3 rounded-xl text-[14px] font-semibold no-underline hover:bg-[#f0f7ff] transition-colors w-full shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                        <Mail size={15} />
+                        שלחו לנו מייל
+                      </a>
+                      <a href="tel:+972000000000" className="flex items-center justify-center gap-2 bg-white/10 text-white/90 px-5 py-3 rounded-xl text-[14px] font-normal no-underline hover:bg-white/20 transition-colors w-full mt-3 border border-white/10">
+                        <Phone size={15} />
+                        <span dir="ltr">050-000-0000</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ═══ CTA BANNER ═══ */}
       <section className="mx-[3%] mb-12">
