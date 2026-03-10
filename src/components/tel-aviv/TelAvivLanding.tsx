@@ -212,19 +212,19 @@ export default function TelAvivLanding() {
             </motion.div>
           </div>
 
-          {/* Scroll hint */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40">
-            <ChevronDown size={20} className="animate-bounce" />
+          {/* Search bar - inside hero */}
+          <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 w-full max-w-[660px] px-[5%]">
+            <div className="bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center overflow-hidden">
+              <input type="text" placeholder="חיפוש שירותים, מאמרים ומדריכים..." className="flex-1 px-6 py-4 text-[15px] text-[#333] placeholder-[#aaa] border-none outline-none bg-transparent text-right font-[inherit] font-light" dir="rtl" />
+              <button className="shrink-0 bg-[#0077C8] text-white px-5 py-4 border-none cursor-pointer hover:bg-[#005fa3] transition-colors">
+                <Search size={18} />
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Search bar */}
-        <div className="max-w-[660px] mx-auto -mt-7 relative z-20 px-[5%]">
-          <div className="bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center overflow-hidden">
-            <input type="text" placeholder="חיפוש שירותים, מאמרים ומדריכים..." className="flex-1 px-6 py-4 text-[15px] text-[#333] placeholder-[#aaa] border-none outline-none bg-transparent text-right font-[inherit] font-light" dir="rtl" />
-            <button className="shrink-0 bg-[#0077C8] text-white px-5 py-4 border-none cursor-pointer hover:bg-[#005fa3] transition-colors">
-              <Search size={18} />
-            </button>
+          {/* Scroll hint */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40">
+            <ChevronDown size={20} className="animate-bounce" />
           </div>
         </div>
       </section>
