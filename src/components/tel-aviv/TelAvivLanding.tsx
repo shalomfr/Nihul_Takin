@@ -123,7 +123,7 @@ export default function TelAvivLanding() {
             </div>
             {/* Logo */}
             <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center no-underline">
-              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-11 w-auto" />
+              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-9 w-auto" />
             </a>
             {/* Left nav */}
             <div className="hidden lg:flex items-center gap-2">
@@ -199,6 +199,16 @@ export default function TelAvivLanding() {
                 </motion.div>
               </div>
             </div>
+
+            {/* Center: Big Logo */}
+            <motion.div
+              className="hidden lg:flex items-center justify-center shrink-0 mx-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
+            >
+              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[280px] xl:h-[320px] w-auto drop-shadow-[0_4px_24px_rgba(255,255,255,0.15)]" />
+            </motion.div>
 
             {/* Left: Questionnaire in hero */}
             <motion.div
