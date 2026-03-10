@@ -109,7 +109,7 @@ export default function QuestionnaireScroller() {
           href="mailto:info@matefet.co.il"
           className="flex items-center justify-center gap-2 w-full bg-[#0077C8] text-white border-none px-4 py-2.5 rounded-lg text-[13px] font-bold transition-all duration-200 hover:bg-[#005fa3] no-underline cursor-pointer"
         >
-          רוצים לדעת את התוצאה? דברו איתנו
+          רוצים לדעת יותר? דברו איתנו
         </a>
       </div>
     </div>
