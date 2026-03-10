@@ -20,15 +20,15 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export default function ServiceCards() {
   return (
-    <div className="bg-white border-t border-b border-[#e5e7eb]">
+    <div className="bg-white border-t border-b border-[#e5e7eb]" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       <div className="max-w-[1400px] mx-auto px-[3%] py-8">
         <div className="flex items-center gap-8">
           {/* Title */}
           <div className="shrink-0 text-right pl-8 border-l border-[#e5e7eb]">
-            <h2 className="text-[22px] font-bold text-[#0077C8] leading-tight m-0">
+            <h2 className="text-[22px] font-semibold text-[#0077C8] leading-tight m-0">
               שירותים
             </h2>
-            <h2 className="text-[22px] font-bold text-[#0077C8] leading-tight m-0">
+            <h2 className="text-[22px] font-semibold text-[#0077C8] leading-tight m-0">
               נפוצים
             </h2>
           </div>

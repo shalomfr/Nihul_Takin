@@ -100,7 +100,7 @@ export default function TelAvivLanding() {
   }, []);
 
   return (
-    <div className="bg-[#f5f6f8] min-h-screen">
+    <div className="bg-[#f5f6f8] min-h-screen" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       {/* ══════════════════ LOADER ══════════════════ */}
       <AnimatePresence>
         {loading && (
@@ -234,18 +234,18 @@ export default function TelAvivLanding() {
         <div className="w-full h-[350px] sm:h-[420px] md:h-[480px] relative">
           {/* Background image */}
           <img
-            src={`/binder.webp?v=${v}`}
+            src="/office-bg.jpg"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "center 30%" }}
+            style={{ objectPosition: "center 25%" }}
           />
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-l from-[#0f1b3d]/80 via-[#0f1b3d]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#0a1628]/75 via-[#0a1628]/40 to-[#0a1628]/20" />
 
           {/* Hero text overlay */}
           <div className="absolute bottom-16 right-[5%] md:right-[8%]">
             <motion.h1
-              className="text-[36px] sm:text-[48px] md:text-[56px] font-black text-white leading-tight"
+              className="text-[36px] sm:text-[48px] md:text-[56px] font-bold text-white leading-tight tracking-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -306,7 +306,7 @@ export default function TelAvivLanding() {
             {/* Topics */}
             <section className="mb-10">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-[24px] font-bold text-[#0077C8] m-0">תחומי ידע</h2>
+                <h2 className="text-[24px] font-semibold text-[#0077C8] m-0">תחומי ידע</h2>
                 <button
                   onClick={() => setActivePanel("articles")}
                   className="text-[13px] text-[#0077C8] font-medium hover:underline cursor-pointer bg-transparent border-none"
@@ -337,7 +337,7 @@ export default function TelAvivLanding() {
                           <Icon size={40} className="text-white/80" />
                         </div>
                         <div className="p-4">
-                          <h3 className="text-[15px] font-bold text-[#333] mb-1 group-hover:text-[#0077C8] transition-colors">
+                          <h3 className="text-[15px] font-semibold text-[#333] mb-1 group-hover:text-[#0077C8] transition-colors">
                             {topic.title}
                           </h3>
                           <p className="text-[12px] text-[#666] leading-relaxed m-0">
@@ -353,7 +353,7 @@ export default function TelAvivLanding() {
 
             {/* News */}
             <section>
-              <h2 className="text-[24px] font-bold text-[#0077C8] mb-6 m-0">חדשות ועדכונים</h2>
+              <h2 className="text-[24px] font-semibold text-[#0077C8] mb-6 m-0">חדשות ועדכונים</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {newsItems.map((item) => (
                   <div
@@ -361,7 +361,7 @@ export default function TelAvivLanding() {
                     className="bg-white rounded-xl border border-[#e5e7eb] p-5 flex items-center gap-4 hover:shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition-shadow cursor-pointer"
                   >
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-[14px] font-bold text-[#333] mb-2 leading-snug">{item.title}</h3>
+                      <h3 className="text-[14px] font-semibold text-[#333] mb-2 leading-snug">{item.title}</h3>
                       <span className="text-[12px] text-[#999]">{item.date}</span>
                     </div>
                     <div
@@ -384,7 +384,7 @@ export default function TelAvivLanding() {
               {/* CTA card */}
               <div className="mt-4 bg-[#0077C8] rounded-xl p-6 text-white text-center">
                 <MessageCircle size={28} className="mx-auto mb-3 opacity-80" />
-                <h3 className="text-[18px] font-bold mb-2">צריכים עזרה?</h3>
+                <h3 className="text-[18px] font-semibold mb-2">צריכים עזרה?</h3>
                 <p className="text-[13px] text-white/80 mb-4 leading-relaxed">
                   צוות מעטפת ניהולית ילווה אתכם בכל שלב
                 </p>
@@ -417,7 +417,7 @@ export default function TelAvivLanding() {
             <div className="flex items-center gap-3">
               <img src={`/logo-transparent.webp?v=${v}`} alt="מעטפת ניהולית" className="h-10 w-auto" />
               <div className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold text-[#333]">ניהול תקין</span>
+                <span className="text-[15px] font-semibold text-[#333]">ניהול תקין</span>
                 <span className="text-[11px] text-[#999]">מעטפת ניהולית</span>
               </div>
             </div>

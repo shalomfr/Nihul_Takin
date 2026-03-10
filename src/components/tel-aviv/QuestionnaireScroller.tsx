@@ -34,7 +34,7 @@ export default function QuestionnaireScroller() {
   const items = questionnaire;
 
   return (
-    <div className="bg-white rounded-lg border border-[#e5e7eb] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden">
+    <div className="bg-white rounded-lg border border-[#e5e7eb] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       {/* Header */}
       <div className="px-5 py-4 border-b border-[#e5e7eb] bg-[#0077C8]">
         <h3 className="text-[16px] font-bold text-white m-0">

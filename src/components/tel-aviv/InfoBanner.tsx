@@ -9,7 +9,7 @@ const updates = [
 
 export default function InfoBanner() {
   return (
-    <div className="bg-[#0077C8] text-white overflow-hidden">
+    <div className="bg-[#0077C8] text-white overflow-hidden" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       <div className="max-w-[1400px] mx-auto flex items-center px-[3%] py-2 text-[13px]">
         {/* Label */}
         <div className="flex items-center gap-2 shrink-0 pl-6 border-l border-white/20 ml-4">
