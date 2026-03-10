@@ -168,6 +168,18 @@ export default function TelAvivLanding() {
           {/* Pattern overlay */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
 
+          {/* Center: Big Logo - absolute center */}
+          <motion.div
+            className="hidden lg:flex absolute inset-0 z-[5] items-center justify-center pointer-events-none"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
+          >
+            <div className="bg-white/20 backdrop-blur-xl rounded-3xl p-10 shadow-[0_8px_40px_rgba(0,0,0,0.15)] border border-white/20">
+              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[220px] xl:h-[260px] w-auto brightness-[1.8] contrast-[1.1]" />
+            </div>
+          </motion.div>
+
           <div className="relative z-10 max-w-[1400px] mx-auto px-[3%] h-full flex items-stretch py-10 md:py-14">
             {/* Right: Hero content */}
             <div className="flex-1 flex items-center">
@@ -199,18 +211,6 @@ export default function TelAvivLanding() {
                 </motion.div>
               </div>
             </div>
-
-            {/* Center: Big Logo */}
-            <motion.div
-              className="hidden lg:flex items-center justify-center shrink-0 mx-4"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-            >
-              <div className="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-[0_8px_40px_rgba(0,0,0,0.2)]">
-                <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-[220px] xl:h-[260px] w-auto" />
-              </div>
-            </motion.div>
 
             {/* Left: Questionnaire in hero */}
             <motion.div
