@@ -122,9 +122,8 @@ export default function TelAvivLanding() {
               })}
             </div>
             {/* Logo */}
-            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 no-underline">
-              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-9 w-auto" />
-              <span className="text-[14px] font-semibold text-[#333]">ניהול תקין</span>
+            <a href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center no-underline">
+              <img src={`/logo-transparent.webp?v=${v}`} alt="ניהול תקין" className="h-14 w-auto" />
             </a>
             {/* Left nav */}
             <div className="hidden lg:flex items-center gap-2">
