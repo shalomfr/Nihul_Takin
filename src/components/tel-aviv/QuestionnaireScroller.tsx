@@ -1,5 +1,7 @@
 "use client";
+import { useState, useRef, useEffect } from "react";
 import { questionnaire } from "@/data/questionnaire";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Landmark,
   ClipboardList,
@@ -13,55 +15,77 @@ import {
   BookOpen,
   Handshake,
   FileText,
+  ChevronDown,
+  X,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  "q1": Landmark,
-  "q2": ClipboardList,
-  "q3": Search,
-  "q4": FileBarChart,
-  "q5": Coins,
-  "q6": Scale,
-  "q7": Users,
-  "q8": Receipt,
-  "q9": ScrollText,
-  "q10": BookOpen,
-  "q11": Handshake,
-  "q12": FileText,
+  "q1": Landmark, "q2": ClipboardList, "q3": Search, "q4": FileBarChart,
+  "q5": Coins, "q6": Scale, "q7": Users, "q8": Receipt,
+  "q9": ScrollText, "q10": BookOpen, "q11": Handshake, "q12": FileText,
 };
 
 export default function QuestionnaireScroller() {
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [paused, setPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const items = questionnaire;
 
+  // Pause animation when answer is open
+  const isAnimationPaused = paused || openId !== null;
+
+  const handleClick = (id: string) => {
+    setOpenId(prev => prev === id ? null : id);
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-[#e5e7eb] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl border border-white/30 shadow-[0_8px_40px_rgba(0,0,0,0.15)] overflow-hidden" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       {/* Header */}
       <div className="px-5 py-4 border-b border-[#e5e7eb] bg-[#0077C8]">
         <h3 className="text-[16px] font-bold text-white m-0">
           בדקו את העמותה שלכם
         </h3>
         <p className="text-[12px] text-white/70 mt-1 m-0">
-          שאלון ניהול תקין מהיר
+          לחצו על שאלה לקריאת התשובה
         </p>
       </div>
 
       {/* Scrolling area */}
-      <div className="h-[420px] lg:h-[520px] overflow-hidden relative bg-[#fafbfc]">
-        <div className="absolute top-0 inset-x-0 h-6 bg-gradient-to-b from-[#fafbfc] to-transparent z-10 pointer-events-none" />
-        <div className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-[#fafbfc] to-transparent z-10 pointer-events-none" />
+      <div
+        className="h-[420px] lg:h-[520px] overflow-hidden relative bg-[#fafbfc]"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="absolute top-0 inset-x-0 h-8 bg-gradient-to-b from-[#fafbfc] to-transparent z-10 pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-8 bg-gradient-to-t from-[#fafbfc] to-transparent z-10 pointer-events-none" />
 
-        <div className="animate-[scrollUp_35s_linear_infinite] hover:[animation-play-state:paused] py-3">
+        <div
+          ref={scrollRef}
+          className="py-3"
+          style={{
+            animation: `scrollUp 35s linear infinite`,
+            animationPlayState: isAnimationPaused ? "paused" : "running",
+          }}
+        >
           {[...items, ...items].map((item, idx) => {
             const Icon = iconMap[item.id];
+            const uniqueKey = `${item.id}-${idx}`;
+            const isOpen = openId === uniqueKey;
+
             return (
               <div
-                key={`${item.id}-${idx}`}
-                className="mx-3 mb-2.5 p-3.5 bg-white rounded-lg border border-[#e5e7eb] transition-all duration-200 hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] hover:border-[#0077C8]/30 cursor-default"
+                key={uniqueKey}
+                onClick={() => handleClick(uniqueKey)}
+                className={`mx-3 mb-2.5 p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none ${
+                  isOpen
+                    ? "bg-[#f0f7ff] border-[#0077C8]/40 shadow-[0_4px_16px_rgba(0,119,200,0.12)]"
+                    : "bg-white border-[#e5e7eb] hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] hover:border-[#0077C8]/30"
+                }`}
               >
                 <div className="flex items-start gap-3">
                   <div
-                    className="w-1 self-stretch rounded-full shrink-0"
-                    style={{ backgroundColor: item.color }}
+                    className="w-1 self-stretch rounded-full shrink-0 transition-all duration-200"
+                    style={{ backgroundColor: isOpen ? "#0077C8" : item.color }}
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 mb-1.5">
@@ -69,10 +93,35 @@ export default function QuestionnaireScroller() {
                       <span className="text-[10px] font-bold text-[#0077C8] tracking-wider">
                         {item.category}
                       </span>
+                      <div className="mr-auto">
+                        <ChevronDown
+                          size={14}
+                          className={`text-[#0077C8]/50 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        />
+                      </div>
                     </div>
                     <p className="text-[13px] text-[#333] leading-relaxed font-medium m-0">
                       {item.question}
                     </p>
+
+                    {/* Answer */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-3 pt-3 border-t border-[#0077C8]/15">
+                            <p className="text-[12px] text-[#555] leading-[1.7] font-normal m-0">
+                              {item.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               </div>

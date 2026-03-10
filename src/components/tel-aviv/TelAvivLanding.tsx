@@ -162,41 +162,54 @@ export default function TelAvivLanding() {
 
       {/* ═══ HERO ═══ */}
       <section className="relative overflow-hidden bg-[#0a1628]">
-        <div className="w-full h-[400px] sm:h-[460px] md:h-[520px] relative">
+        <div className="w-full min-h-[400px] sm:min-h-[460px] md:min-h-[520px] relative">
           <img src="/office-bg.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" style={{ objectPosition: "center 25%" }} />
           {/* Gradient overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,40,80,0.85) 0%, rgba(0,80,140,0.6) 40%, rgba(0,119,200,0.3) 100%)" }} />
           {/* Pattern overlay */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
 
-          <div className="relative z-10 max-w-[1400px] mx-auto px-[5%] h-full flex items-center">
-            <div className="max-w-[600px]">
-              <motion.div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-6" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse" />
-                <span className="text-[12px] text-white/90 font-light tracking-wide">ליווי ניהולי מוביל לעמותות וארגונים</span>
-              </motion.div>
+          <div className="relative z-10 max-w-[1400px] mx-auto px-[3%] h-full flex items-stretch py-10 md:py-14">
+            {/* Right: Hero content */}
+            <div className="flex-1 flex items-center">
+              <div className="max-w-[600px]">
+                <motion.div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-6" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+                  <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse" />
+                  <span className="text-[12px] text-white/90 font-light tracking-wide">ליווי ניהולי מוביל לעמותות וארגונים</span>
+                </motion.div>
 
-              <motion.h1 className="text-[38px] sm:text-[48px] md:text-[58px] font-bold text-white leading-[1.1] mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }}>
-                ניהול תקין
-                <br />
-                <span className="bg-gradient-to-l from-[#60b3f7] to-[#a5d8ff] bg-clip-text text-transparent">מעטפת ניהולית</span>
-              </motion.h1>
+                <motion.h1 className="text-[38px] sm:text-[48px] md:text-[58px] font-bold text-white leading-[1.1] mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }}>
+                  ניהול תקין
+                  <br />
+                  <span className="bg-gradient-to-l from-[#60b3f7] to-[#a5d8ff] bg-clip-text text-transparent">מעטפת ניהולית</span>
+                </motion.h1>
 
-              <motion.p className="text-[16px] sm:text-[17px] text-white/70 leading-relaxed mb-8 max-w-[480px] font-light" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }}>
-                פועלים כגוף ליווי מקצועי לעמותות וארגונים. מנהלים את התשתית הניהולית, הרגולטורית והמערכתית שלכם.
-              </motion.p>
+                <motion.p className="text-[16px] sm:text-[17px] text-white/70 leading-relaxed mb-8 max-w-[480px] font-light" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }}>
+                  פועלים כגוף ליווי מקצועי לעמותות וארגונים. מנהלים את התשתית הניהולית, הרגולטורית והמערכתית שלכם.
+                </motion.p>
 
-              <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.5 }}>
-                <a href="mailto:info@matefet.co.il" className="inline-flex items-center gap-2 bg-[#0077C8] text-white px-7 py-3 rounded-lg text-[14px] font-semibold no-underline hover:bg-[#005fa3] transition-all hover:shadow-[0_8px_24px_rgba(0,119,200,0.35)]">
-                  צרו קשר
-                  <ArrowLeft size={16} />
-                </a>
-                <a href="tel:+972000000000" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg text-[14px] font-normal no-underline hover:bg-white/20 transition-colors">
-                  <Phone size={15} />
-                  <span dir="ltr">050-000-0000</span>
-                </a>
-              </motion.div>
+                <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.5 }}>
+                  <a href="mailto:info@matefet.co.il" className="inline-flex items-center gap-2 bg-[#0077C8] text-white px-7 py-3 rounded-lg text-[14px] font-semibold no-underline hover:bg-[#005fa3] transition-all hover:shadow-[0_8px_24px_rgba(0,119,200,0.35)]">
+                    צרו קשר
+                    <ArrowLeft size={16} />
+                  </a>
+                  <a href="tel:+972000000000" className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg text-[14px] font-normal no-underline hover:bg-white/20 transition-colors">
+                    <Phone size={15} />
+                    <span dir="ltr">050-000-0000</span>
+                  </a>
+                </motion.div>
+              </div>
             </div>
+
+            {/* Left: Questionnaire in hero */}
+            <motion.div
+              className="hidden lg:block w-[340px] xl:w-[370px] shrink-0"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <QuestionnaireScroller />
+            </motion.div>
           </div>
 
           {/* Scroll hint */}
@@ -311,7 +324,10 @@ export default function TelAvivLanding() {
           {/* ── Left: Sidebar ── */}
           <div className="w-full lg:w-[330px] xl:w-[360px] shrink-0">
             <div className="lg:sticky lg:top-[84px]">
-              <QuestionnaireScroller />
+              {/* Mobile only: questionnaire */}
+              <div className="lg:hidden mb-5">
+                <QuestionnaireScroller />
+              </div>
 
               {/* CTA */}
               <div className="mt-5 rounded-2xl overflow-hidden">
