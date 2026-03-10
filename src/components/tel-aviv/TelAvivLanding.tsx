@@ -369,7 +369,7 @@ export default function TelAvivLanding() {
 
             {/* CTA sidebar */}
             <div className="w-full lg:w-[340px] shrink-0">
-              <div className="lg:sticky lg:top-[84px]">
+              <div>
                 {/* Mobile only: questionnaire */}
                 <div className="lg:hidden mb-5">
                   <QuestionnaireScroller />
