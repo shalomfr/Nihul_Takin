@@ -39,7 +39,7 @@ export default function QuestionnaireScroller() {
   };
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-2xl border border-white/30 shadow-[0_8px_40px_rgba(0,0,0,0.15)] overflow-hidden" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl border border-white/30 shadow-[0_8px_40px_rgba(0,0,0,0.15)] overflow-hidden h-full flex flex-col" style={{ fontFamily: "'Assistant', 'Inter', sans-serif" }}>
       {/* Header */}
       <div className="px-5 py-4 border-b border-[#e5e7eb] bg-[#0077C8]">
         <h3 className="text-[16px] font-bold text-white m-0">
@@ -52,7 +52,7 @@ export default function QuestionnaireScroller() {
 
       {/* Scrolling area */}
       <div
-        className="h-[420px] lg:h-[520px] overflow-hidden relative bg-[#fafbfc]"
+        className="flex-1 overflow-hidden relative bg-[#fafbfc]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >

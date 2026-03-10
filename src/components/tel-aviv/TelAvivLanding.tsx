@@ -162,7 +162,7 @@ export default function TelAvivLanding() {
 
       {/* ═══ HERO ═══ */}
       <section className="relative overflow-hidden bg-[#0a1628]">
-        <div className="w-full min-h-[400px] sm:min-h-[460px] md:min-h-[520px] relative">
+        <div className="w-full relative" style={{ height: "calc(100vh - 100px)", minHeight: "460px" }}>
           <img src="/office-bg.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" style={{ objectPosition: "center 25%" }} />
           {/* Gradient overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,40,80,0.85) 0%, rgba(0,80,140,0.6) 40%, rgba(0,119,200,0.3) 100%)" }} />
