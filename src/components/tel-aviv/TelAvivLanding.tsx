@@ -1,7 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { topics } from "@/data/topics";
+import { articles } from "@/data/articles";
+import { faq } from "@/data/faq";
+import { dictionary } from "@/data/dictionary";
 import TopicModal from "@/components/TopicModal";
 import SidePanel from "@/components/SidePanel";
 import InfoBanner from "@/components/tel-aviv/InfoBanner";
@@ -9,6 +12,7 @@ import ServiceCards from "@/components/tel-aviv/ServiceCards";
 import QuestionnaireScroller from "@/components/tel-aviv/QuestionnaireScroller";
 import type { PanelType } from "@/components/SidePanel";
 import type { Topic } from "@/data/topics";
+import Link from "next/link";
 import {
   Search, ChevronLeft, ChevronRight, LayoutGrid, MessageCircle,
   BookOpen, HelpCircle, FileText, Menu, X, Landmark, Coins,
@@ -45,14 +49,17 @@ const stats = [
   { value: "24/7", label: "זמינות מלאה", icon: Clock },
 ];
 
-const newsItems = [
-  { id: 1, title: "עדכון: חובת הגשת דוחות שנתיים לרשם העמותות", date: "10.3.26", tag: "דוחות" },
-  { id: 2, title: "שינוי בתקנות גמול חברי ועד מנהל בעמותות", date: "8.3.26", tag: "תקנות" },
-  { id: 3, title: "הנחיות חדשות מרשם העמותות לניהול תקין 2026", date: "5.3.26", tag: "ניהול תקין" },
-  { id: 4, title: "דרישות מעודכנות לקבלת אישור סעיף 46", date: "3.3.26", tag: "סעיף 46" },
-  { id: 5, title: "מדריך: כיצד לנהל ועדת ביקורת אפקטיבית", date: "1.3.26", tag: "ביקורת" },
-  { id: 6, title: "שינויים בחוק העמותות - מה חדש ב-2026", date: "28.2.26", tag: "חקיקה" },
-];
+// First 6 articles are news items
+const newsItems = articles.slice(0, 6);
+
+interface SearchResult {
+  type: "article" | "topic" | "faq" | "dictionary";
+  title: string;
+  snippet: string;
+  href?: string;
+  action?: () => void;
+}
+
 
 export default function TelAvivLanding() {
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
@@ -60,6 +67,57 @@ export default function TelAvivLanding() {
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close search results when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchFocused(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Search across all content
+  const searchResults = useMemo<SearchResult[]>(() => {
+    const q = searchQuery.trim();
+    if (q.length < 2) return [];
+    const results: SearchResult[] = [];
+
+    // Search articles
+    for (const article of articles) {
+      if (article.title.includes(q) || article.summary.includes(q) || article.content.some(p => p.includes(q))) {
+        results.push({ type: "article", title: article.title, snippet: article.summary || article.content[0].slice(0, 80) + "...", href: `/articles/${article.slug}` });
+      }
+    }
+
+    // Search topics
+    for (const topic of topics) {
+      if (topic.title.includes(q) || topic.content.some(p => p.includes(q))) {
+        results.push({ type: "topic", title: topic.title, snippet: topic.content[0].slice(0, 80) + "...", action: () => setSelectedTopic(topic) });
+      }
+    }
+
+    // Search FAQ
+    for (const item of faq) {
+      if (item.question.includes(q) || item.answer.includes(q)) {
+        results.push({ type: "faq", title: item.question, snippet: item.answer.slice(0, 80) + "...", action: () => setActivePanel("faq") });
+      }
+    }
+
+    // Search dictionary
+    for (const entry of dictionary) {
+      if (entry.term.includes(q) || entry.definition.includes(q)) {
+        results.push({ type: "dictionary", title: entry.term, snippet: entry.definition.slice(0, 80) + "...", action: () => setActivePanel("dictionary") });
+      }
+    }
+
+    return results.slice(0, 8);
+  }, [searchQuery]);
 
   useEffect(() => {
     const minDelay = new Promise(resolve => setTimeout(resolve, 1500));
@@ -212,13 +270,63 @@ export default function TelAvivLanding() {
           </div>
 
           {/* Search bar - inside hero */}
-          <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 w-full max-w-[660px] px-[5%]">
+          <div ref={searchRef} className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 w-full max-w-[660px] px-[5%]">
             <div className="bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center overflow-hidden">
-              <input type="text" placeholder="חיפוש שירותים, מאמרים ומדריכים..." className="flex-1 px-6 py-4 text-[15px] text-[#333] placeholder-[#aaa] border-none outline-none bg-transparent text-right font-[inherit] font-light" dir="rtl" />
+              <input
+                type="text"
+                placeholder="חיפוש שירותים, מאמרים ומדריכים..."
+                className="flex-1 px-6 py-4 text-[15px] text-[#333] placeholder-[#aaa] border-none outline-none bg-transparent text-right font-[inherit] font-light"
+                dir="rtl"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+              />
               <button className="shrink-0 bg-[#0077C8] text-white px-5 py-4 border-none cursor-pointer hover:bg-[#005fa3] transition-colors">
                 <Search size={18} />
               </button>
             </div>
+            {/* Search results dropdown */}
+            <AnimatePresence>
+              {searchFocused && searchResults.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="mt-2 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[#eee] overflow-hidden max-h-[400px] overflow-y-auto"
+                >
+                  {searchResults.map((result, i) => {
+                    const typeLabels: Record<string, string> = { article: "כתבה", topic: "נושא", faq: "שאלה", dictionary: "מונח" };
+                    const typeColors: Record<string, string> = { article: "#0077C8", topic: "#1e3a5f", faq: "#4ade80", dictionary: "#f59e0b" };
+                    const inner = (
+                      <div className="px-5 py-3 hover:bg-[#f8fbff] transition-colors cursor-pointer border-b border-[#f5f5f5] last:border-b-0 flex items-start gap-3">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 shrink-0" style={{ color: typeColors[result.type], background: `${typeColors[result.type]}15` }}>
+                          {typeLabels[result.type]}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-[14px] font-medium text-[#333] truncate">{result.title}</div>
+                          <div className="text-[12px] text-[#999] truncate">{result.snippet}</div>
+                        </div>
+                      </div>
+                    );
+                    if (result.href) {
+                      return <Link key={i} href={result.href} className="no-underline block" onClick={() => setSearchFocused(false)}>{inner}</Link>;
+                    }
+                    return <div key={i} onClick={() => { result.action?.(); setSearchFocused(false); setSearchQuery(""); }}>{inner}</div>;
+                  })}
+                </motion.div>
+              )}
+              {searchFocused && searchQuery.length >= 2 && searchResults.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  className="mt-2 bg-white rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[#eee] px-5 py-4 text-center text-[14px] text-[#999]"
+                >
+                  לא נמצאו תוצאות
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Scroll hint */}
@@ -354,16 +462,18 @@ export default function TelAvivLanding() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {newsItems.map((item, i) => (
               <motion.div key={item.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <div className="bg-[#fafbfc] rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-white transition-all cursor-pointer group">
-                  <div className="flex-1 min-w-0">
-                    <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2.5 py-0.5 rounded-full mb-2.5">{item.tag}</span>
-                    <h3 className="text-[14px] font-medium text-[#333] mb-2 leading-snug group-hover:text-[#0077C8] transition-colors">{item.title}</h3>
-                    <span className="text-[12px] text-[#bbb] font-light">{item.date}</span>
+                <Link href={`/articles/${item.slug}`} className="no-underline block">
+                  <div className="bg-[#fafbfc] rounded-xl border border-[#eee] p-5 flex items-start gap-4 hover:border-[#0077C8]/20 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:bg-white transition-all cursor-pointer group">
+                    <div className="flex-1 min-w-0">
+                      <span className="inline-block text-[10px] font-semibold text-[#0077C8] bg-[#0077C8]/8 px-2.5 py-0.5 rounded-full mb-2.5">{item.tag}</span>
+                      <h3 className="text-[14px] font-medium text-[#333] mb-2 leading-snug group-hover:text-[#0077C8] transition-colors">{item.title}</h3>
+                      <span className="text-[12px] text-[#bbb] font-light">{item.date}</span>
+                    </div>
+                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 mt-1 border border-[#eee]">
+                      <FileText size={18} className="text-[#ccc] group-hover:text-[#0077C8] transition-colors" />
+                    </div>
                   </div>
-                  <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 mt-1 border border-[#eee]">
-                    <FileText size={18} className="text-[#ccc] group-hover:text-[#0077C8] transition-colors" />
-                  </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
